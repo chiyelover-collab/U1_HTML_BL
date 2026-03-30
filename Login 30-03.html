@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang = "es">
+<head>
+    <meta charset = "UTF-8">    
+    <title> Login </title>
+    <link rel="stylesheet" href = "CSS/style_login.css" />
+</head>
+    <header class = "class_header">
+        <img src = "Recursos visuales/logo_empresa_letra_v1.png" alt = "Logo de la empresa" style = "width: 200px; height: 80px;" />
+    </header>
+    <body class = "class_body">
+    <form class = "class_form" action = "/submit_login" method = "post">
+        <h1 class= "class_h1"> Inicia Sesión </h1>
+        <label class = "class_label" for = "email"> Email: </label>
+        <input class = "class_input" type = "text" id = "email" name = "email" placeholder= "Ingresa tu correo"/>
+        <label class = "class_label" for = "contrasena"> Contraseña: </label>
+        <input class = "class_input" type = "text" id = "contrasena" name = "contrasena" placeholder= "Ingresa tu contraseña"/>
+        <button class = "class_botton" type = "submit"> Ingresar </button>
+        <hr>        
+        <a class = "class_a" href = "/contrasena_olvidada"> ¿Olvidaste tu contraseña? </a>
+        <a class = "class_a1" href = "/registrate"> Registrate </a>
+    </form>
+    </body>
+</html>
