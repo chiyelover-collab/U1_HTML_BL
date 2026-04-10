@@ -1,0 +1,77 @@
+.class_header {
+    background-color: #66b3ff;
+    font: 20px TrebucheT MS, sans-serif;
+    color: white;
+    text-shadow: 0px 5px 15px rgba(0,0,0,0.5);
+}
+
+.class_img_logo {
+    width: 90px;
+    height: 35px;
+}
+
+.class_navbar {
+    background-color: #003366;
+}
+
+.class_a1 {
+    color: white;
+    font: 16px TrebucheT MS, sans-serif;
+}
+
+.class_title {
+    margin-left: 30px;
+}
+
+.class_img_perfil {
+    width: 100px;
+    height: 100px;
+}
+
+.class_card1 {
+    width: 400px;
+    box-shadow: 0px 5px 15px rgba(0,0,0,0.7);
+}
+
+.class_p1 {
+    font: 14 px TrebucheT MS, sans-serif;
+    margin-top: 10px;
+
+}
+
+.class_card2 {
+    width: 400px;
+    height: 220px;
+    box-shadow: 0px 5px 15px rgba(0,0,0,0.7);;
+}
+
+.class_p2 {
+    font: 12px TrebucheT MS, sans-serif;
+}
+
+.class.card3 {
+    width: 500px;
+    height: 350px;
+    box-shadow: 0px 5px 15px rgba(0,0,0,0.7);
+    font: 14px TrebucheT MS, sans-serif;
+}
+
+.class_button1 {
+    width: 70px;
+    margin-left: 220px;
+}
+
+.class_button2 {
+    width: 70px;
+    margin-left: 190px;
+}
+
+.class_card4 {
+    margin-top: 20px;
+    box-shadow: 0px 5px 15px rgba(0,0,0,0.7);
+    font: 14px TrebucheT MS, sans-serif;
+}
+
+.class_card_header{
+    background-color: #8585e0;
+}
