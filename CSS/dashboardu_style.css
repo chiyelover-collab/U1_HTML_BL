@@ -20,7 +20,7 @@
 }
 
 .class_title {
-    margin-left: 30px;
+    margin-left: 20px;
 }
 
 .class_img_perfil {
@@ -42,14 +42,14 @@
 .class_card2 {
     width: 400px;
     height: 220px;
-    box-shadow: 0px 5px 15px rgba(0,0,0,0.7);;
+    box-shadow: 0px 5px 15px rgba(0,0,0,0.7);
 }
 
 .class_p2 {
     font: 12px TrebucheT MS, sans-serif;
 }
 
-.class.card3 {
+.class_card3 {
     width: 500px;
     height: 350px;
     box-shadow: 0px 5px 15px rgba(0,0,0,0.7);
@@ -59,11 +59,17 @@
 .class_button1 {
     width: 70px;
     margin-left: 220px;
+    background-color: #003366;
+    color: white;
+    box-shadow: 0px 5px 15px rgba(0,0,0,0.5);
 }
 
 .class_button2 {
     width: 70px;
     margin-left: 190px;
+    background-color: #003366;
+    color: white;
+    box-shadow: 0px 5px 15px rgba(0,0,0,0.5);
 }
 
 .class_card4 {
@@ -73,5 +79,17 @@
 }
 
 .class_card_header{
-    background-color: #8585e0;
+    background-color:  #66b3ff;
+    text-decoration: underline;
 }
+
+.class_title2 {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 20px;
+}
+
+.class_body {
+    background-color: #fdebb4;
+}
+
