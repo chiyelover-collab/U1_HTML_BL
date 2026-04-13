@@ -6,8 +6,8 @@
 }
 
 .class_img_logo {
-    width: 90px;
-    height: 35px;
+    width: 100%;
+    max-width: 120px;
 }
 
 .class_navbar {
@@ -24,13 +24,13 @@
 }
 
 .class_img_perfil {
-    width: 100px;
-    height: 100px;
+    max-width: 70px;
+    width: 100%;
 }
 
 .class_card1 {
-    width: 400px;
-    height: 460px;
+    max-width: 400px;
+    width: 100%;
     box-shadow: 0px 5px 15px rgba(0,0,0,0.7);
 }
 
@@ -41,8 +41,8 @@
 }
 
 .class_card2 {
-    width: 400px;
-    height: 220px;
+    max-width: 400px;
+    width: 100%;
     box-shadow: 0px 5px 15px rgba(0,0,0,0.7);
 }
 
@@ -51,23 +51,21 @@
 }
 
 .class_card3 {
-    width: 500px;
-    height: 350px;
+    max-width: 500px;
+    width: 100%;
     box-shadow: 0px 5px 15px rgba(0,0,0,0.7);
     font: 14px TrebucheT MS, sans-serif;
 }
 
 .class_button1 {
-    width: 70px;
-    margin-left: 220px;
+    width: 30%;
     background-color: #003366;
     color: white;
     box-shadow: 0px 5px 15px rgba(0,0,0,0.5);
 }
 
 .class_button2 {
-    width: 70px;
-    margin-left: 190px;
+    width: 30%;
     background-color: #003366;
     color: white;
     box-shadow: 0px 5px 15px rgba(0,0,0,0.5);
