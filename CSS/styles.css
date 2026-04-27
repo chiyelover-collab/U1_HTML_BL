@@ -14,7 +14,7 @@
     border-style: groove;
     border-width: 10px;
     padding: 20px;
-    height: 400px;
+    height: 420px;
     width: 300px;
     margin: 0 auto;
     margin-top: 50px;
@@ -120,9 +120,6 @@
     border: none;
     cursor: pointer;
     border-radius: 5px;
-    margin-left: 100px;
-    margin-bottom: 10px;
-    margin-top: 40px;
     box-shadow: 5px 5px 10px rgba(0,0,0,0.4);
 }
 
@@ -219,4 +216,23 @@
     width: 210px;
     margin: auto;
     margin-top: 15px
+}
+
+.class_a {
+    font: 12px Trebuchet MS, sans-serif;
+}
+
+.class_men_error{
+    font: 13px Trebuchet MS, sans-serif;
+    text-align: center;
+    color: red;
+
+
+}
+
+.class_button3{
+    font: 15px Trebuchet MS, sans-serif;
+    background-color: #2d1a47;
+    color: white;
+    border-radius: 5px;
 }
