@@ -15,6 +15,8 @@ btnIngresar.addEventListener('click', async () => {
         return; 
     }
 
+
+    try {
     const response = await fetch ('http://localhost:3000/api/auth/login', {
         method : 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -24,21 +26,37 @@ btnIngresar.addEventListener('click', async () => {
         })
     });
 
-    const data = await response.json();
-    console.log(data);
+    const reply = await response.json();
+    console.log(reply);
+    console.log(response.status);
 
-    // if (encontrado) {
+
+    if (response.ok && reply.data.user) {
     
-    //     localStorage.setItem("user", JSON.stringify(encontrado));
+        localStorage.setItem("user", JSON.stringify(reply.data.user));
 
-    //     if (encontrado.role === "admin") {
-    //         window.location.href = "dashboard_admin.html";
-    //     } else if (encontrado.role === "coach") {
-    //         window.location.href = "dashboard_coach.html";
-    //     } else {
-    //         window.location.href = "dashboard_usuario.html";
-    //     }
-    // } else {
-    //     mensajeError.textContent = "Credenciales incorrectas";
-    // }
+        const rol = reply.data.user.role.toLowerCase().trim();
+
+        if (rol === "admin") {
+        window.location.href = "dashboard_admin.html";
+        } else if (rol === "coach") {
+        window.location.href = "dashboard_coach.html";
+        } else {
+        window.location.href = "dashboard_usuario.html";
+        }
+    } 
+        else if (response.status === 401) {
+            mensajeError.textContent = "Credenciales incorrectas";
+            mensajeError.style.color = "red";
+        }
+        else {
+            mensajeError.textContent = reply.message || "Error al iniciar sesión";
+            mensajeError.style.color = "red";
+        }
+
+    } catch (error) {
+        console.error("Error:", error);
+        mensajeError.textContent = "Error de conexión con el servidor";
+        mensajeError.style.color = "red";
+    }
 });
