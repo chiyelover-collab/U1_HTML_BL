@@ -58,14 +58,16 @@
                         </div>
                         <div class = "card-body" style = "text-align: center;">
                             <img src = "Recursos visuales/XiaoChiye_Infobox_MulingMerch.webp" alt = "avatar" class = "class_img_avatar rounded-circle class_img_perfil" >
-                            <p class = "class_p1"> <b>Nombre:</b> Xiao Chiye </p>
-                            <p class = "class_p1"> <b>Email:</b> x.chiy333@gmail.com </p>
-                            <p class = "class_p1"> <b>Fecha de Nacimiento:</b> 28-03-2001 </p>
+                            <p class = "class_p1" id ="perfilNombre"> <b>Nombre:</b> Xiao Chiye </p>
+                            <p class = "class_p1" id ="perfilEmail"> <b>Email:</b> x.chiy333@gmail.com </p>
+                            <p class = "class_p1" id ="perfilFecha"> <b>Fecha de Nacimiento:</b> 28-03-2001 </p>
                             <span class="badge bg-success">Usuario</span>
                             <b><u><p class = "class_p1"> Objetivos Personales:</p></u></b>
-                            <p class = "class_p1"> ✰ Perder peso </p>
-                            <p class = "class_p1"> ✰ Ganar músculo </p>
-                            <p class = "class_p1"> ✰ Mejorar resistencia </p>      
+                            <div id="perfilObjetivos">
+                                <p class = "class_p1 " id ="perfilObjetivo1"> ✰ Perder peso </p>
+                                <p class = "class_p1" id ="perfilObjetivo2"> ✰ Ganar músculo </p>
+                                <p class = "class_p1" id ="perfilObjetivo3"> ✰ Mejorar resistencia </p>
+                            </div>   
                         </div>
                     </article>
                 </div>
@@ -99,7 +101,7 @@
                                         </form>
                                     </div>
                                     <div class="card-footer" style = "text-align: right;">
-                                        <button type="submit" class="btn class_button1">Guardar Cambios</button>
+                                        <button type="submit" class="btn class_button1" id="btnGuardarPerfil">Guardar Cambios</button>
                                     </div>
                                 </article>
                             </div>
@@ -125,7 +127,7 @@
                                                         <input type="password" class="form-control" id="confirm_password">
                                                     </div>
                                                     <div class = "col-12 col-md-6 col-xl-6 col-xxl-6 mx-auto mt-4">
-                                                        <button type="submit" class="btn class_button4" style = >Cambiar Contraseña</button>
+                                                        <button type="submit" class="btn class_button4" id="btnCambiarPassword" >Cambiar Contraseña</button>
                                                     </div>
                                                 </div>
                                             </form>
@@ -138,5 +140,6 @@
             </section>
         </main>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <script src = "javascript/editar_perfil.js"></script>
     </body>
 </html>

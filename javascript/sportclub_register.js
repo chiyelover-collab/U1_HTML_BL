@@ -5,7 +5,7 @@ const nombreInput = document.getElementById('nombre');
 const edadInput = document.getElementById('edad');
 const deporteInput = document.getElementById('deporte');
 const objetivoInput = document.getElementById('objetivo');
-const btnIngresar = document.getElementById('btnRegistrar');
+const btnRegistrar = document.getElementById('btnRegistrar');
 const mensajeError = document.getElementById('mensajeError');
 
 btnRegistrar.addEventListener('click', async () => {
@@ -40,9 +40,11 @@ btnRegistrar.addEventListener('click', async () => {
                 password: clave,
                 full_name: nombre,
                 birth_date: edad,
-                nivel: nivel,
-                deporte: deporte,
-                objetivo: objetivo
+                metadata: {
+                    nivel: nivel,
+                    deporte: deporte,
+                    objetivo: objetivo
+            }
         })
     });
 
