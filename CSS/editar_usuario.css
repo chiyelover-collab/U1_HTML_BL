@@ -109,3 +109,19 @@
     height: 92%;
 
 }
+
+.class_error_mensaje {
+    color: #d93025;         
+    font-size: 12px;        
+    font-family: 'Trebuchet MS', sans-serif; 
+    display: block;        
+    height: 15px;           
+    margin-top: 5px;        
+    visibility: hidden;    
+}
+
+
+.class_input_error {
+    border: 2px solid #d93025 !important; 
+    background-color: #fff8f8;          
+}
