@@ -37,7 +37,7 @@ function validarNuevaPassword() {
     let esValido = true;
     const nueva = document.getElementById('new_password').value;
     const confirma = document.getElementById('confirm_password').value;
-    const passRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+    const passRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*_]).{8,}$/;
 
     if (!passRegex.test(nueva)) {
         gestionarErrorVisual('new_password', 'Mínimo 8 caracteres (letras y números)');
@@ -92,14 +92,18 @@ async function actualizarPerfilEnBD(datos) {
     return await res.json();
 }
 
-async function actualizarPasswordEnBD(actual, nueva) {
+async function actualizarPasswordEnBD(actual, nueva, confirma) {
     const res = await fetch('http://localhost:3000/api/auth/me/password', {
         method: 'PUT',
         headers: {
             'Authorization': `Bearer ${localStorage.getItem('token')}`,
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ passwordActual: actual, passwordNueva: nueva })
+        body: JSON.stringify({ 
+            current_password: actual, 
+            new_password: nueva,
+            confirm_password: confirma
+            })
     });
     if (!res.ok) {
         const err = await res.json();
@@ -120,15 +124,28 @@ function refrescarTodaLaInterfaz(usuario) {
     document.getElementById('email').value = d.email || "";
 
     if (d.birth_date) {
-        document.getElementById('perfilFecha').textContent = d.birth_date;
+        const partes = d.birth_date.split('-'); 
+        const fechaLinda = `${partes[2]}/${partes[1]}/${partes[0]}`;
+        document.getElementById('perfilFecha').textContent = fechaLinda;
         document.getElementById('fecha_nacimiento').value = d.birth_date;
     }
 
     if (d.metadata && d.metadata.objetivo) {
         const cardObjetivos = document.getElementById('perfilObjetivos');
         if (cardObjetivos) {
-            cardObjetivos.innerHTML = `<p class="class_p1"> ✰ ${d.metadata.objetivo} </p>`;
+            // Dividimos el texto por cada "Enter" que hiciste
+            const lineas = d.metadata.objetivo.split('\n');
+
+            // Procesamos: Limpiar espacios -> Quitar vacías -> Poner estrella ✰
+            const listaHtml = lineas
+                .map(linea => linea.trim())
+                .filter(linea => linea !== "") 
+                .map(linea => `✰ ${linea}`)
+                .join('<br>'); // Los unimos con saltos de línea HTML
+
+            cardObjetivos.innerHTML = `<p class="class_p1">${listaHtml}</p>`;
         }
+        // En el formulario dejamos el texto original para editarlo fácil
         document.getElementById('objetivos').value = d.metadata.objetivo;
     }
 }
@@ -182,10 +199,11 @@ document.addEventListener('DOMContentLoaded', async () => {
             const btn = document.getElementById('btnCambiarPassword');
             const actual = document.getElementById('current_password').value;
             const nueva = document.getElementById('new_password').value;
+            const confirma = document.getElementById('confirm_password').value;
 
             try {
                 btn.disabled = true;
-                await actualizarPasswordEnBD(actual, nueva);
+                await actualizarPasswordEnBD(actual, nueva, confirma);
                 btn.textContent = "¡Éxito!";
                 document.getElementById('formPassword').reset();
             } catch (err) {
