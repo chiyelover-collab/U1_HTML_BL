@@ -6,7 +6,7 @@
     <title>Gestión de Usuarios - Admin</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="CSS/dashboarda_style.css"/>
+    <link rel="stylesheet" href="CSS/gestion_admin.css"/>
 </head>
 <body class="class_body">
     <header class="class_header container-fluid">
@@ -14,9 +14,9 @@
             <div class="col-md-4">
                 <img src="Recursos visuales/logo_empresa_letra_v1.png" alt="logo" class="class_logo class_img_logo">
             </div>
-            <div class="col-md-8">
+            <div class="col-md-8 mx-auto text-center text-md-start">
                 <h1 class="class_h1 class_title"> Gestión de Usuarios </h1>
-                <p class="mb-2">Administra los usuarios del sistema, asigna roles y controla accesos.</p>
+                <h6 class="mb-2">Administra los usuarios en sistema.</h6>
             </div>
         </div>
     </header>
@@ -45,8 +45,8 @@
         <section class="row mb-4 align-items-center">
             <div class="col-md-8">
                 <div class="input-group">
-                    <span class="input-group-text bg-white"><i class="fas fa-search"></i></span>
-                    <input type="text" class="form-control" placeholder="Buscar usuario por nombre o email..." id="searchUser">
+                    <span class="input-group-text bg-white" max-length="25"><i class="fas fa-search"></i></span>
+                    <input type="text" class="form-control" placeholder="Buscar usuario..." id="searchUser">
                 </div>
             </div>
             <div class="col-md-4 text-end">
@@ -63,55 +63,20 @@
                         <h5 class="class_h5 mb-0"><i class="fas fa-list"></i> Listado de Usuarios</h5>
                     </div>
                     <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table table-hover align-middle">
-                                <thead class="table-light">
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>Nombre Completo</th>
-                                        <th>Email</th>
-                                        <th>Rol</th>
-                                        <th>Fecha Registro</th>
-                                        <th class="text-center">Acciones</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="class_tbody">
-                                    <tr>
-                                        <td>001</td>
-                                        <td>Xiao Chiye</td>
-                                        <td>xiao.chiye@gym.cl</td>
-                                        <td><span class="badge bg-danger">Admin</span></td>
-                                        <td>15/03/2026</td>
-                                        <td class="text-center">
-                                            <button class="btn btn-warning btn-sm me-1" title="Editar"><i class="fas fa-edit"></i></button>
-                                            <button class="btn btn-danger btn-sm" title="Eliminar"><i class="fas fa-trash"></i></button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>002</td>
-                                        <td>Shen Lanzhou</td>
-                                        <td>s.lanzhou@coach.cl</td>
-                                        <td><span class="badge bg-primary">Coach</span></td>
-                                        <td>20/03/2026</td>
-                                        <td class="text-center">
-                                            <button class="btn btn-warning btn-sm me-1"><i class="fas fa-edit"></i></button>
-                                            <button class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>003</td>
-                                        <td>Xue Meng</td>
-                                        <td>xue.meng@user.cl</td>
-                                        <td><span class="badge bg-success">User</span></td>
-                                        <td>01/04/2026</td>
-                                        <td class="text-center">
-                                            <button class="btn btn-warning btn-sm me-1"><i class="fas fa-edit"></i></button>
-                                            <button class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>
-                                        </td>
-                                    </tr>
+                        <div class="table-responsive"> <table class="table table-hover align-middle">
+                            <thead class="class_table_head">
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Nombre Completo</th>
+                                    <th>Email</th>
+                                    <th>Rol</th>
+                                    <th>Fecha Registro</th>
+                                    <th class="text-center">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody class="class_tbody" id="usersTableBody">
                                 </tbody>
-                            </table>
-                        </div>
+                        </table>
                     </div>
                 </article>
             </div>
@@ -127,31 +92,33 @@
                         <form id="formNuevoUsuario" class="row g-3">
                             <div class="col-md-6">
                                 <label class="form-label">Nombre Completo</label>
-                                <input type="text" class="form-control is-invalid" placeholder="Ej: Juan Pérez">
-                                <div class="invalid-feedback">El nombre es obligatorio.</div>
+                                <input type="text" class="form-control" id="nombre_admin" placeholder="Ej: Xiao Chiye" maxlength="30">
+                                <span id="error-nombre_admin" class="class_error-mensaje" style="display:none;"></span>
                             </div>
                             <div class="col-md-6">
                                 <label class="form-label">Email</label>
-                                <input type="email" class="form-control" placeholder="usuario@correo.com">
-                                <span class="text-danger small">El email es obligatorio.</span>
+                                <input type="email" class="form-control" id="email_admin" placeholder="usuario@correo.com" maxlength="30">
+                                <span id="error-email_admin" class="class_error-mensaje" style="display:none;"></span>
                             </div>
                             <div class="col-md-6">
                                 <label class="form-label">Rol</label>
-                                <select class="form-select">
-                                    <option selected disabled>Seleccionar rol...</option>
+                                <select class="form-select" id="rol_admin">
+                                    <option value="" selected disabled>Seleccionar rol...</option>
                                     <option value="admin">Administrador</option>
                                     <option value="coach">Entrenador</option>
                                     <option value="user">Usuario Estándar</option>
                                 </select>
+                                <span id="error-rol_admin" class="class_error-mensaje" style="display:none;"></span>
                             </div>
                             <div class="col-md-6">
                                 <label class="form-label">Contraseña</label>
-                                <input type="password" class="form-control border-danger">
-                                <span class="text-danger small">Contraseña mínima 8 caracteres.</span>
+                                <input type="password" class="form-control" id="pass_admin" maxlength="20">
+                                <span id="error-pass_admin" class="class_error-mensaje" style="display:none;"></span>
                             </div>
                             <div class="col-md-6">
                                 <label class="form-label">Confirmar Contraseña</label>
-                                <input type="password" class="form-control">
+                                <input type="password" class="form-control" id="confirma_admin" maxlength="20">
+                                <span id="error-confirma_admin" class="class_error-mensaje" style="display:none;"></span>
                             </div>
                             <div class="col-12 mt-4">
                                 <button type="submit" class="btn class_button1 w-100">Registrar Usuario</button>
@@ -186,7 +153,47 @@
             </div>
         </section>
     </main>
+    <div id="notificationContainer" class="position-fixed top-0 end-0 p-3" style="z-index: 1080;"></div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <div class="modal fade" id="editUserModal" tabindex="-1" aria-labelledby="editUserModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header class_card_header">
+                    <h5 class="modal-title class_h5" id="editUserModalLabel">Editar Usuario</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="formEditarUsuario">
+                        <input type="hidden" id="edit_id">
+                        <div class="mb-3">
+                            <label class="form-label">Nombre Completo</label>
+                            <input type="text" class="form-control" id="edit_nombre">
+                            <span id="error-edit_nombre" class="text-danger small" style="display:none;"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Email</label>
+                            <input type="email" class="form-control" id="edit_email">
+                            <span id="error-edit_email" class="text-danger small" style="display:none;"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Rol</label>
+                            <select class="form-select" id="edit_rol">
+                                <option value="admin">Administrador</option>
+                                <option value="coach">Entrenador</option>
+                                <option value="user">Usuario</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" id="btnConfirmarEdicion" class="btn class_button1">Guardar Cambios</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+<script src ="javascript/gestionar_admin.js"></script>
 </body>
 </html>

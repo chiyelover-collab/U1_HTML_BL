@@ -11,7 +11,7 @@
 
 .class_subtitle {
     margin-left: 0px;
-    text-align: center;
+    text-align: center6;
 }
 .class_img_logo {
     width: 100%;
@@ -67,4 +67,46 @@
     background-color: #3d225d;
     color: white
 }
+
+/* Estado de éxito temporal para botones */
+.btn-success-state {
+    background-color: #28a745 !important;
+    border-color: #28a745 !important;
+    color: white !important;
+    transition: all 0.3s ease;
+}
+
+/* Animación de desvanecimiento para mensajes */
+.fade-out {
+    opacity: 0;
+    transition: opacity 2s ease-out;
+}
+
+.class_input_error {
+    border: 2px solid #dc3545 !important;
+    background-color: #fff8f8 !important;
+}
+
+/* Mensajes de error debajo de los inputs */
+.class_error-mensaje {
+    color: #dc3545;
+    font-size: 0.85rem;
+    font-weight: bold;
+    display: block;
+    margin-top: 5px;
+}
+
+.class_table-responsive {
+    max-height: 400px; /* Altura máxima antes de mostrar la barra */
+    overflow-y: auto;  /* Scroll vertical automático */
+    border-radius: 8px;
+    background-color: white;
+}
+
+/* 3. Personalizamos la barra de scroll para que combine con tu paleta morada */
+.class_table-responsive::-webkit-scrollbar {
+    width: 8px;
+}
+
+
 

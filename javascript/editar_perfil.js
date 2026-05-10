@@ -9,30 +9,7 @@
 
 // --- 1. REGLAS DE VALIDACIÓN ---
 
-function validarDatosPersonales() {
-    let esValido = true;
-    const nombre = document.getElementById('nombre').value.trim();
-    const email = document.getElementById('email').value.trim();
-    const objetivos = document.getElementById('objetivos').value.trim();
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-    if (!nombre) {
-        gestionarErrorVisual('nombre', 'El nombre es obligatorio');
-        esValido = false;
-    } else { gestionarErrorVisual('nombre', null); }
-
-    if (!emailRegex.test(email)) {
-        gestionarErrorVisual('email', 'Email inválido');
-        esValido = false;
-    } else { gestionarErrorVisual('email', null); }
-
-    if (objetivos.length > 200) {
-        console.warn("Objetivos demasiado largos");
-        esValido = false;
-    }
-    return esValido;
-}
-
+6
 function validarNuevaPassword() {
     let esValido = true;
     const nueva = document.getElementById('new_password').value;
