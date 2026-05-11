@@ -1,26 +1,23 @@
-/**
- * FLUJO DE INGENIERÍA - GESTIÓN ADMIN:
- * 1. Configuración y Estado Global
- * 2. Validaciones y Gestión de Errores
- * 3. Comunicación API (Fetch)
- * 4. Actualización Visual (DOM & Notificaciones)
- * 5. Eventos y Controladores
- */
 
-// --- 1. CONFIGURACIÓN ---
-const API_URL = 'http://localhost:3000/api/users'; // Ajusta según tu backend
+const API_URL = 'http://localhost:3000/api/users'; 
 const TOKEN = localStorage.getItem('token');
-let USUARIOS_LOCALES = []; // Respaldo para el buscador
+let USUARIOS_LOCALES = []; 
+const nombreRegex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/;
 
-// --- 2. VALIDACIONES Y GESTIÓN DE ERRORES ---
 
 function gestionarErrorVisual(idInput, mensaje) {
     const input = document.getElementById(idInput);
     const spanError = document.getElementById(`error-${idInput}`);
+    
+    if (!input) return; 
+
     if (mensaje) {
         input.classList.add('class_input_error');
-        spanError.textContent = mensaje;
-        spanError.style.display = 'block';
+
+        if (spanError) {
+            spanError.textContent = mensaje;
+            spanError.style.display = 'block';
+        }
     } else {
         input.classList.remove('class_input_error');
         if (spanError) spanError.style.display = 'none';
@@ -30,7 +27,6 @@ function gestionarErrorVisual(idInput, mensaje) {
 function validarCamposUsuario(data, esEdicion = false) {
     let esValido = true;
     
-    // Detectamos qué IDs usar: los de edición o los de creación (_admin)
     const idNombre = esEdicion ? 'edit_nombre' : 'nombre_admin';
     const idEmail = esEdicion ? 'edit_email' : 'email_admin';
     const idRol = esEdicion ? 'edit_rol' : 'rol_admin';
@@ -38,25 +34,27 @@ function validarCamposUsuario(data, esEdicion = false) {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const passRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*_]).{8,}$/;
 
-    // 1. Validar Nombre
+
     if (!data.full_name || data.full_name.length < 3) {
         gestionarErrorVisual(idNombre, 'El nombre debe tener al menos 3 caracteres');
         esValido = false;
-    } else { gestionarErrorVisual(idNombre, null); }
+    } else if (!nombreRegex.test(data.full_name)) {
+        gestionarErrorVisual(idNombre, 'El nombre solo puede contener letras');
+        esValido = false;
+    } else { 
+        gestionarErrorVisual(idNombre, null); 
+    }
 
-    // 2. Validar Email
     if (!emailRegex.test(data.email)) {
         gestionarErrorVisual(idEmail, 'Ingrese un correo electrónico válido');
         esValido = false;
     } else { gestionarErrorVisual(idEmail, null); }
 
-    // 3. Validar Rol (Nueva validación visual)
     if (!data.role || data.role === "") {
         gestionarErrorVisual(idRol, 'Debe seleccionar un rol para el usuario');
         esValido = false;
     } else { gestionarErrorVisual(idRol, null); }
 
-    // 4. Validar Contraseñas (Solo para creación)
     if (!esEdicion) {
         if (!passRegex.test(data.password)) {
             gestionarErrorVisual('pass_admin', 'Mínimo 8 caracteres, incluya Mayúscula, número y símbolo (!@#*)');
@@ -72,7 +70,6 @@ function validarCamposUsuario(data, esEdicion = false) {
     return esValido;
 }
 
-// --- 3. COMUNICACIÓN API (FETCH) ---
 
 async function fetchAPI(endpoint, method = 'GET', body = null) {
     const options = {
@@ -92,13 +89,11 @@ async function fetchAPI(endpoint, method = 'GET', body = null) {
     return await res.json();
 }
 
-// --- 4. ACTUALIZACIÓN VISUAL Y NOTIFICACIONES ---
 
 function enviarNotificacion(mensaje, tipo = 'success') {
     const container = document.getElementById('notificationContainer');
     const id = Date.now();
-    const color = tipo === 'success' ? 'bg-primary' : 'bg-danger'; // Morado o Rojo
-
+    const color = tipo === 'success' ? 'bg-primary' : 'bg-danger'; 
     container.innerHTML += `
     <div id="toast-${id}" class="toast align-items-center text-white ${color} border-0 show" role="alert">
         <div class="d-flex">
@@ -112,9 +107,9 @@ function enviarNotificacion(mensaje, tipo = 'success') {
         if (t) t.remove();
     }, 4000);
 }
-// --- 4. ACTUALIZACIÓN VISUAL ---
+
+
 function renderUsers(respuesta) {
-    // 1. Extraemos la lista del paquete 'data'
     const lista = respuesta.data || respuesta; 
     
     const tbody = document.getElementById('usersTableBody');
@@ -122,7 +117,6 @@ function renderUsers(respuesta) {
     
     tbody.innerHTML = '';
     
-    // 2. Ahora sí podemos usar forEach en la lista real
     lista.forEach(user => {
         const role = user.role.toLowerCase();
         const badgeColor = { 'admin': 'bg-danger', 'coach': 'bg-primary', 'user': 'bg-success' }[role] || 'bg-secondary';
@@ -147,11 +141,9 @@ function renderUsers(respuesta) {
     });
 }
 
-// --- 5. CONTROLADORES ---
 async function cargarUsuarios() {
     try {
         const respuesta = await fetchAPI('/');
-        // Guardamos solo la lista interna para que 'find' funcione después
         USUARIOS_LOCALES = respuesta.data || []; 
         renderUsers(respuesta);
     } catch (err) {
@@ -160,30 +152,22 @@ async function cargarUsuarios() {
 }
 
 document.getElementById('searchUser').addEventListener('input', (e) => {
-    // 2. Convertimos lo que escribes a minúsculas para que no importe si usas Mayúsculas
     const terminoBusqueda = e.target.value.toLowerCase();
-
-    // 3. Filtramos nuestra lista 'USUARIOS_LOCALES'
     const usuariosFiltrados = USUARIOS_LOCALES.filter(usuario => {
         const nombre = usuario.full_name.toLowerCase();
         const correo = usuario.email.toLowerCase();
 
-        // Verificamos si el nombre O el correo contienen lo que escribiste
         return nombre.includes(terminoBusqueda) || correo.includes(terminoBusqueda);
     });
 
-    // 4. Actualizamos la tabla enviando los resultados filtrados
-    // Importante: Lo enviamos como objeto { data: ... } para que renderUsers lo entienda
     renderUsers({ data: usuariosFiltrados }); 
 });
 
 
-// CREACIÓN DE USUARIO
 document.getElementById('formNuevoUsuario').addEventListener('submit', async (e) => {
     e.preventDefault();
     const btn = e.target.querySelector('button[type="submit"]');
     
-    // Capturamos los datos usando los IDs de tu HTML
     const nuevoUsuario = {
         full_name: document.getElementById('nombre_admin').value.trim(),
         email: document.getElementById('email_admin').value.trim(),
@@ -197,15 +181,13 @@ document.getElementById('formNuevoUsuario').addEventListener('submit', async (e)
             btn.disabled = true;
             btn.innerHTML = '<span class="spinner-border spinner-border-sm"></span> Registrando...';
             
-            // Llamada a la API
             await fetchAPI('/', 'POST', nuevoUsuario);
             
-            // Feedback visual de éxito
             btn.classList.add('btn-success-state');
             btn.innerHTML = '<i class="fas fa-check"></i> ¡Usuario Creado!';
             
-            e.target.reset(); // Limpia el formulario
-            await cargarUsuarios(); // Refresca la tabla
+            e.target.reset(); 
+            await cargarUsuarios(); 
             enviarNotificacion("Usuario registrado correctamente");
 
         } catch (err) {
@@ -218,11 +200,10 @@ document.getElementById('formNuevoUsuario').addEventListener('submit', async (e)
             }, 3000);
         }
     } else {
-        // Si hay error, avisamos al administrador
         enviarNotificacion("Por favor, revise los errores en el formulario", "error");
     }
 });
-// BORRADO CON NOTIFICACIÓN
+
 async function confirmarBorrado(id, btn) {
     if (!confirm("¿Desea eliminar este usuario permanentemente?")) return;
 
@@ -246,21 +227,17 @@ async function confirmarBorrado(id, btn) {
     }
 }
 
-// EDICIÓN EN MODAL
+//MODAL
 
 function abrirModalEdicion(id) {
-    // 1. Buscamos al usuario en nuestra lista local usando el ID
     const usuario = USUARIOS_LOCALES.find(u => u.id === id);
 
     if (usuario) {
-        // 2. "Pintamos" los datos en los inputs del modal
-        // Usamos los IDs que tú pusiste en el HTML (edit_id, edit_nombre, etc.)
         document.getElementById('edit_id').value = usuario.id;
         document.getElementById('edit_nombre').value = usuario.full_name;
         document.getElementById('edit_email').value = usuario.email;
         document.getElementById('edit_rol').value = usuario.role.toLowerCase();
 
-        // 3. Le decimos a Bootstrap que muestre el modal
         const miModal = new bootstrap.Modal(document.getElementById('editUserModal'));
         miModal.show();
     }
@@ -287,5 +264,5 @@ document.getElementById('btnConfirmarEdicion').addEventListener('click', async (
     }
 });
 
-// INICIO
+
 document.addEventListener('DOMContentLoaded', cargarUsuarios);

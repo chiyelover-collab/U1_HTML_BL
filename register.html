@@ -14,15 +14,23 @@
         <h2 class= "class_h2"> Regístrate </h2>
             <div class = "class_div2">
                 <label class = "class_label" for = "email"> Email: </label>
-                <input class = "class_input" type = "text" id = "email" name = "email" required/>
+                <input class = "class_input" type = "text" id = "email" name = "email" required maxlength="25"/>
+                <span id="error-email" class="class_men_error"></span>
                 <label class = "class_label" for = "contrasena"> Contraseña: </label>
-                <input class = "class_input" type = "password" id = "contrasena" name = "contrasena" required/>
+                <input class = "class_input" type = "password" id = "contrasena" name = "contrasena" required maxlength="20"/>
+                <span id="error-contrasena" class="class_men_error"></span>
             </br>
                 <label class = "class_label" for = "contrasena2"> Repite Contraseña: </label>
-                <input class = "class_input" type = "password" id = "contrasena2" name = "contrasena2" required/>
+                <input class = "class_input" type = "password" id = "contrasena2" name = "contrasena2" required maxlength="20"/>
+            <div>
+                <span id="error-contrasena2" class="class_men_error"></span>
+            </div>
             </br>
                 <label class = "class_label" for = "nombre"> Nombre: </label>
-                <input class = "class_input" type = "text" id = "nombre" name = "nombre" required/>
+                <input class = "class_input" type = "text" id = "nombre" name = "nombre" required maxlength="30"/>
+            <div>  
+                <span id="error-nombre" class="class_men_error"></span>
+            </div>
             </br>
                 <label class = "class_label" for = "edad"> Fecha de nacimiento: </label>
                 <input class = "class_input" type = "date" id = "edad" name = "edad" required/>
@@ -39,10 +47,16 @@
                 <label class = "class_label" for="javascript">A veces</label>
             </br>
                 <label class = "class_label" for = "deporte" style="margin-top: 20px;"> Si practicas un deporte, ¿cuál es?: </label>
-                <input class = "class_input" type = "text" id = "deporte" name = "deporte"/>
+                <input class = "class_input" type = "text" id = "deporte" name = "deporte" maxlength="50"/>
+            <div>
+                <span id="error-deporte" class="class_men_error"></span>
+            </div>
             </br>
-                <label class = "class_label" for = "deporte"> ¿Cual es tu objetivo?:</label>
-                <input class = "class_input" type = "text" id = "objetivo" name = "objetivo"/>
+                <label class = "class_label" for = "deporte"> Cual es tu objetivo:</label>
+                <input class = "class_input" type = "text" id = "objetivo" name = "objetivo" maxlength="100"/>
+            <div>
+                <span id="error-objetivo" class="class_men_error"></span>
+            </div>
             </br>
             <div class="text-center mx-auto my-4">
                 <button id = "btnRegistrar" class = "class_button3" type = "button"> Registrarse </button>

@@ -1,15 +1,46 @@
-/**
- * FLUJO DE INGENIERÍA:
- * 1. Validaciones (Reglas de entrada)
- * 2. Gestión Visual (Errores)
- * 3. Comunicación API (Base de Datos)
- * 4. Actualización de Interfaz (Reflejo de cambios)
- * 5. Eventos (Gatillos)
- */
 
-// --- 1. REGLAS DE VALIDACIÓN ---
+const nombreRegex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/;
+function validarDatosPersonales() {
+    let esValido = true;
+    const nombre = document.getElementById('nombre').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const objetivos = document.getElementById('objetivos').value.trim();
 
-6
+    if (nombre.length < 3) {
+        gestionarErrorVisual('nombre', 'Mínimo 3 caracteres');
+        esValido = false;
+    } 
+    else if (!nombreRegex.test(nombre)) {
+        gestionarErrorVisual('nombre', 'Solo se permiten letras');
+        esValido = false;
+    } 
+    else { 
+        gestionarErrorVisual('nombre', null); 
+    }
+
+    if (!emailRegex.test(email)) {
+        gestionarErrorVisual('email', 'Ingrese un correo electrónico válido');
+        esValido = false;
+    } else { gestionarErrorVisual('email', null); }
+
+    if (objetivos.length < 10) {
+        gestionarErrorVisual('objetivos', 'Mínimo 10 caracteres');
+        esValido = false;
+    } 
+    else if (!nombreRegex.test(objetivos)) {
+        gestionarErrorVisual('objetivos', 'Solo se permiten letras y espacios');
+        esValido = false;
+    } 
+    else { 
+        gestionarErrorVisual('objetivos', null); 
+    }
+
+    return esValido;
+}
+
+
+
 function validarNuevaPassword() {
     let esValido = true;
     const nueva = document.getElementById('new_password').value;
@@ -17,7 +48,7 @@ function validarNuevaPassword() {
     const passRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*_]).{8,}$/;
 
     if (!passRegex.test(nueva)) {
-        gestionarErrorVisual('new_password', 'Mínimo 8 caracteres (letras y números)');
+        gestionarErrorVisual('new_password', 'Mínimo 8 caracteres (use Mayúscula, número y símbolo !@#*)');
         esValido = false;
     } else { gestionarErrorVisual('new_password', null); }
 
@@ -29,22 +60,19 @@ function validarNuevaPassword() {
     return esValido;
 }
 
-// --- 2. GESTIÓN VISUAL ---
-
 function gestionarErrorVisual(idInput, mensaje) {
     const input = document.getElementById(idInput);
     const spanError = document.getElementById(`error-${idInput}`);
     if (mensaje) {
         input.classList.add('class_input_error');
         spanError.textContent = mensaje;
+        spanError.textcolor = 'red';
         spanError.style.visibility = 'visible';
     } else {
         input.classList.remove('class_input_error');
-        spanError.style.visibility = 'hidden';
+        if (spanError) spanError.style.visibility = 'hidden';
     }
 }
-
-// --- 3. COMUNICACIÓN CON LA BASE DE DATOS (API FETCH) ---
 
 async function obtenerPerfilDeBD() {
     const token = localStorage.getItem('token');
@@ -88,8 +116,6 @@ async function actualizarPasswordEnBD(actual, nueva, confirma) {
     }
 }
 
-// --- 4. ACTUALIZACIÓN DE LA INTERFAZ ---
-
 function refrescarTodaLaInterfaz(usuario) {
     const d = usuario.data; 
 
@@ -110,24 +136,17 @@ function refrescarTodaLaInterfaz(usuario) {
     if (d.metadata && d.metadata.objetivo) {
         const cardObjetivos = document.getElementById('perfilObjetivos');
         if (cardObjetivos) {
-            // Dividimos el texto por cada "Enter" que hiciste
             const lineas = d.metadata.objetivo.split('\n');
-
-            // Procesamos: Limpiar espacios -> Quitar vacías -> Poner estrella ✰
             const listaHtml = lineas
                 .map(linea => linea.trim())
                 .filter(linea => linea !== "") 
                 .map(linea => `✰ ${linea}`)
-                .join('<br>'); // Los unimos con saltos de línea HTML
-
+                .join('<br>');
             cardObjetivos.innerHTML = `<p class="class_p1">${listaHtml}</p>`;
         }
-        // En el formulario dejamos el texto original para editarlo fácil
         document.getElementById('objetivos').value = d.metadata.objetivo;
     }
 }
-
-// --- 5. BLOQUE DE EJECUCIÓN (Eventos) ---
 
 document.addEventListener('DOMContentLoaded', async () => {
     const datosIniciales = await obtenerPerfilDeBD();
@@ -142,8 +161,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         
         if (validarDatosPersonales()) {
             const btn = document.getElementById('btnGuardarPerfil');
-            
-            // MAPEO CORREGIDO PARA EL SERVIDOR
             const nuevosDatos = {
                 full_name: document.getElementById('nombre').value,
                 email: document.getElementById('email').value,

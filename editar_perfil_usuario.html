@@ -41,7 +41,7 @@
             </div>
         </nav>
 
-        <main class="container">
+        <main class="container-fluid">
             <section class="row mx-auto mt-3">
                 <div class="col-12 col-md-4 col-xxl-4">
                     <article class="card class_card1">
@@ -66,33 +66,34 @@
 
                 <div class="col-12 col-md-8 col-xxl-8">
                     <section class="row">
-                        <div class="col-12">
-                            <article class="card class_card2">
+                        <div class="col-12 col-md-12 col-xxl-12">
+                            <article class="card class_card2 h-100">
                                 <div class="card-header class_card_header" style="text-align: center;">
                                     <h5 class="class_h5"> Información Personal </h5>
                                 </div>
                                 <div class="card-body">
                                     <form id="formPerfil">
                                         <div class="row">
-                                            <div class="col-12 col-md-6 col-xxl-66">
+                                            <div class="col-12 col-md-6 col-xxl-6">
                                                 <label for="nombre" class="form-label">Nombre Completo</label>
-                                                <input type="text" class="form-control" id="nombre" maxlength="30">
-                                                <span id="error-nombre" class="classerror-mensaje"></span>
+                                                <input type="text" class="form-control" id="nombre" maxlength="40">
+                                                <span id="error-nombre" class="class_error_mensaje"></span>
                                             </div>
                                             <div class="col-12 col-md-6 col-xxl-6">
                                                 <label for="email" class="form-label">Email</label>
-                                                <input type="email" class="form-control" id="email" maxlength="30">
-                                                <span id="error-email" class="class_error-mensaje"></span>
+                                                <input type="email" class="form-control" id="email" maxlength="25">
+                                                <span id="error-email" class="class_error_mensaje"></span>
                                             </div>
                                         </div>
                                         <div class="mb-3">
                                             <label for="fecha_nacimiento" class="form-label">Fecha de Nacimiento</label>
                                             <input type="date" class="form-control" id="fecha_nacimiento">
-                                            <span id="error-fecha_nacimiento" class="class_error-mensaje"></span>
+                                            <span id="error-fecha_nacimiento" class="class_error_mensaje"></span>
                                         </div>
                                         <div class="mb-3">
                                             <label for="objetivos" class="form-label">Objetivos Personales</label>
                                             <textarea class="form-control" id="objetivos" rows="3" maxlength="200"></textarea>
+                                            <span id="error-objetivos" class="class_error_mensaje"></span>
                                         </div>
                                     </form>
                                 </div>
@@ -102,32 +103,30 @@
                             </article>
                         </div>
 
-                        <div class="col-12 mt-2">
+                        <div class="col-12 col-md-12 col-xxl-12 mt-4">
                             <article class="card class_card5">
                                 <div class="card-header class_card_header" style="text-align: center;">
                                     <h5 class="class_h5"> Cambiar Contraseña </h5>
                                 </div>
                                 <div class="card-body">
                                     <form id="formPassword">
-                                        <div class="row mx-auto">
-                                            <div class="col-12 col-md-6">
+                                        <div class="row">
+                                            <div class="col-12 col-md-4">
                                                 <label for="current_password" class="form-label">Contraseña Actual</label>
-                                                <input type="password" class="form-control" id="current_password" maxlength="20">
+                                                <input type="password" class="form-control" id="current_password">
                                                 <span id="error-current_password" class="class_error-mensaje"></span>
                                             </div>
-                                            <div class="col-12 col-md-6">
+                                            <div class="col-12 col-md-4">
                                                 <label for="new_password" class="form-label">Nueva Contraseña</label>
                                                 <input type="password" class="form-control" id="new_password" maxlength="20">
                                                 <span id="error-new_password" class="class_error-mensaje"></span>
                                             </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-12 col-md-6">
+                                            <div class="col-12 col-md-4">
                                                 <label for="confirm_password" class="form-label">Confirmar Contraseña</label>
                                                 <input type="password" class="form-control" id="confirm_password" maxlength="20">
                                                 <span id="error-confirm_password" class="class_error-mensaje"></span>
                                             </div>
-                                            <div class="col-12 col-md-6 d-flex align-items-end justify-content-end">
+                                            <div class="col-12 text-center mt-3">
                                                 <button type="submit" form="formPassword" class="btn class_button4" id="btnCambiarPassword">Actualizar Contraseña</button>
                                             </div>
                                         </div>

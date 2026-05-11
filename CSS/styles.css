@@ -101,7 +101,7 @@
     margin-top: 100px;
     border-radius: 20px;
     box-shadow: 0 10px 25px rgba(0,0,0,0.5);
-    ;
+    
 
 }
 
@@ -236,3 +236,19 @@
     color: white;
     border-radius: 5px;
 }
+
+.class_input_error {
+    border: 2px solid #dc3545 !important;
+    background-color: #fff8f8 !important;
+}
+
+.class_men_error {
+    color: #dc3545;
+    font-size: 12px;
+    display: block;
+    height: 15px; /* Mantiene el espacio */
+    margin-top: -15px; /* Ajusta según tu padding de input */
+    margin-bottom: 10px;
+    visibility: hidden; /* Oculto por defecto */
+}
+

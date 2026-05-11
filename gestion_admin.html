@@ -11,11 +11,11 @@
 <body class="class_body">
     <header class="class_header container-fluid">
         <div class="class_div_logo row align-items-center">
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <img src="Recursos visuales/logo_empresa_letra_v1.png" alt="logo" class="class_logo class_img_logo">
             </div>
-            <div class="col-md-8 mx-auto text-center text-md-start">
-                <h1 class="class_h1 class_title"> Gestión de Usuarios </h1>
+            <div class="col-md-6  text-center">
+                <h1 class="class_h1 "> Gestión de Usuarios </h1>
                 <h6 class="mb-2">Administra los usuarios en sistema.</h6>
             </div>
         </div>
@@ -34,8 +34,8 @@
                     <li class="nav-item"><a class="nav-link class_a1" href="#">Configuración</a></li>
                 </ul>
                 <div class="d-flex">
-                    <button class="btn me-2 btn-primary" type="button">Editar Perfil</button>
-                    <button class="btn me-2 btn-danger" type="button">Cerrar Sesión</button>
+                    <a href="dashboard_admin.html"><button class="btn me-2 btn-primary" type="button">Dashboard</button></a>
+                    <a href = "login.html"><button class="btn me-2 btn-danger" type="button">Cerrar Sesión</button></a>
                 </div>
             </div>
         </div>
@@ -129,7 +129,7 @@
             </div>
 
             <div class="col-12 col-md-4">
-                <article class="card class_card1 w-100" style="max-width: 100%;">
+                <aside class="card class_card1 w-100" style="max-width: 100%;">
                     <div class="card-header class_card_header">
                         <h5 class="class_h5 mb-0">Instrucciones de Uso</h5>
                     </div>
@@ -139,7 +139,7 @@
                                 <strong>1. Búsqueda:</strong> Filtre instantáneamente por nombre o correo desde la barra superior.
                             </li>
                             <li class="list-group-item bg-transparent">
-                                <strong>2. Gestión:</strong> Use los botones de colores para <span class="text-primary">Editar</span> o <span class="text-danger">Eliminar</span> registros.
+                                <strong>2. Gestión:</strong> Use los botones de colores para <span class="text-warning">Editar</span> o <span class="text-danger">Eliminar</span> registros.
                             </li>
                             <li class="list-group-item bg-transparent">
                                 <strong>3. Roles:</strong> Los badges identifican el nivel de acceso (Admin, Coach, User).
@@ -149,7 +149,7 @@
                             </li>
                         </ul>
                     </div>
-                </article>
+                </aside>
             </div>
         </section>
     </main>
@@ -167,12 +167,12 @@
                         <input type="hidden" id="edit_id">
                         <div class="mb-3">
                             <label class="form-label">Nombre Completo</label>
-                            <input type="text" class="form-control" id="edit_nombre">
+                            <input type="text" class="form-control" id="edit_nombre" maxlength="30">
                             <span id="error-edit_nombre" class="text-danger small" style="display:none;"></span>
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Email</label>
-                            <input type="email" class="form-control" id="edit_email">
+                            <input type="email" class="form-control" id="edit_email" maxlength="25">
                             <span id="error-edit_email" class="text-danger small" style="display:none;"></span>
                         </div>
                         <div class="mb-3">
