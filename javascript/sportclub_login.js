@@ -3,6 +3,8 @@ const passwordInput = document.getElementById('contrasena');
 const btnIngresar = document.getElementById('btnIngresar');
 const mensajeError = document.getElementById('mensajeError');
 
+
+
 btnIngresar.addEventListener('click', async () => {
     const correo = emailInput.value;
     const clave = passwordInput.value;

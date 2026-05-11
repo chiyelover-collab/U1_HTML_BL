@@ -247,8 +247,8 @@
     font-size: 12px;
     display: block;
     height: 15px; /* Mantiene el espacio */
-    margin-top: -15px; /* Ajusta según tu padding de input */
+    margin-top: -5px; /* Ajusta según tu padding de input */
     margin-bottom: 10px;
-    visibility: hidden; /* Oculto por defecto */
+ /* Oculto por defecto */
 }
 
